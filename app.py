@@ -4,7 +4,7 @@ import numpy as np
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)  # ✅ Enable CORS for all routes
+CORS(app, resources={r"/predict": {"origins": "https://thatdelta.github.io"}})
 
 # Load model and scaler once on server start
 model = joblib.load('model.pkl')
@@ -38,5 +38,5 @@ def predict():
 import os
 
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 10000))
     app.run(debug=False, host='0.0.0.0', port=port)
